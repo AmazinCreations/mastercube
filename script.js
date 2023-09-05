@@ -375,58 +375,48 @@ function handleMouseScroll(viewport) {
 
     if (deltaY == 0) return;
 
-    let current_scale_value = viewport.style.getPropertyValue("--scale_value");
-
     //scroll behaviour is inverted
     if (deltaY < 0) {
-      //increase scale till
-      viewport.style.setProperty(
-        "--scale_value",
-        Number(current_scale_value) + 0.02
-      );
+      zoomIn(viewport);
     }
 
     if (deltaY > 0) {
-      //decrease until min
-      viewport.style.setProperty(
-        "--scale_value",
-        Number(current_scale_value) - 0.02
-      );
+      zoomOut(viewport);
     }
   };
 }
 
-// function zoomIn(viewport) {
-//   let current_scale_value = viewport.style.getPropertyValue("--scale_value");
+function zoomIn(viewport) {
+  let current_scale_value = viewport.style.getPropertyValue("--scale_value");
 
-//   console.log(
-//     "%c current_scale_value %s",
-//     "background:orange;color:black;",
-//     current_scale_value
-//   );
+  console.log(
+    "%c current_scale_value %s",
+    "background:orange;color:black;",
+    current_scale_value
+  );
 
-//   //increase scale till
-//   viewport.style.setProperty(
-//     "--scale_value",
-//     Number(current_scale_value) + 0.02
-//   );
-// }
+  //increase scale till
+  viewport.style.setProperty(
+    "--scale_value",
+    Number(current_scale_value) + 0.02
+  );
+}
 
-// function zoomOut(viewport) {
-//   let current_scale_value = viewport.style.getPropertyValue("--scale_value");
+function zoomOut(viewport) {
+  let current_scale_value = viewport.style.getPropertyValue("--scale_value");
 
-//   console.log(
-//     "%c current_scale_value %s",
-//     "background:orange;color:black;",
-//     current_scale_value
-//   );
+  console.log(
+    "%c current_scale_value %s",
+    "background:orange;color:black;",
+    current_scale_value
+  );
 
-//   //decrease until min
-//   viewport.style.setProperty(
-//     "--scale_value",
-//     Number(current_scale_value) - 0.02
-//   );
-// }
+  //decrease until min
+  viewport.style.setProperty(
+    "--scale_value",
+    Number(current_scale_value) - 0.02
+  );
+}
 
 function engageZoom(viewport) {
   console.log("zoom engaged");
@@ -465,12 +455,15 @@ engageble_viewport.addEventListener("mouseleave", () => {
   disengageZoom(engageble_viewport);
 });
 
-// engageble_viewport.addEventListener("keydown", (e) => {
-//   if (e.key == "+") {
-//     zoomIn();
-//   }
+window.addEventListener("keydown", (e) => {
+  console.log("e.key: ", e.key);
 
-//   if (e.key == "-") {
-//     zoomOut();
-//   }
-// });
+  // "+" key
+  if (e.key == "=") {
+    zoomIn(engageble_viewport);
+  }
+
+  if (e.key == "-") {
+    zoomOut(engageble_viewport);
+  }
+});
